@@ -1,3 +1,4 @@
+[Export_D10fcc06a0bec0cc8d39c6a5194716dfc (1).pdf](https://github.com/JaysonSovanHong/stockFE/files/6524520/Export_D10fcc06a0bec0cc8d39c6a5194716dfc.1.pdf)
 # stockFE
 
 
