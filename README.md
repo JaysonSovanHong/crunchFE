@@ -46,5 +46,4 @@ user will have to sign up/login
 <ul>
 <li>log user out</li>
 </ul>
-[Export_D10fcc06a0bec0cc8d39c6a5194716dfc.1.pdf](https://github.com/JaysonSovanHong/stockFE/files/6524640/Export_D10fcc06a0bec0cc8d39c6a5194716dfc.1.pdf)
 
