@@ -40,6 +40,10 @@ user will have to sign up/login
   <li>dalete, delete all user info. </li>
 </ul>
 
+
 6.logout button:
-will log user out.
+<ul>
+<li>log user out</li>
+</ul>
+
 
