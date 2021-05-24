@@ -1,20 +1,23 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../Context/UserContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { userState, FetchUser } = useContext(UserContext);
+  const [user, setUser] = userState;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await axios.post(
+      const newUser = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/user/login`,
         { email, password }
       );
-      console.log(user);
-      // localStorage.setItem("userId", user.data.user.id);
-      // setUser(user.data.user);
+      console.log(newUser);
+      localStorage.setItem("userId", newUser.data.user.id);
+      setUser(newUser.data.user);
     } catch (error) {
       console.log(error);
     }

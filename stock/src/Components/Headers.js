@@ -1,11 +1,16 @@
-import Login from "../pages/Login";
-import Signup from "../pages/Signup";
-
+import Logo from "../pages/Logo.png";
+import Nav from "./Nav";
 const Headers = () => {
   return (
     <div>
-      <Login />
-      <Signup />
+      <div>
+        <img src={Logo} width="100px"></img>
+      </div>
+
+      <div>
+        {" "}
+        <Nav />
+      </div>
     </div>
   );
 };
