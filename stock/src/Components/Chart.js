@@ -1,20 +1,40 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Graph from "./Graph";
 
-const graph = async () => {
-  try {
+const Chart = () => {
+  const [getStocks, setGetStocks] = useState([]);
+  const getAllStock = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/stocks`
     );
-    console.log(response.data.message.data);
-  } catch (error) {
-    console.log("can not find stocks");
-  }
-};
+    console.log(response);
+    setGetStocks(response.data.message.data.coins);
+  };
+  useEffect(getAllStock, []);
 
-const Chart = () => {
-  const [graph, setGraph] = useState("");
-  return <div>Chart</div>;
+  return (
+    <>
+      <ul>
+        {getStocks.map((crypto, c) => {
+          return (
+            <div key={crypto.uuid}>
+              <p>{crypto.name}</p>
+              <p>${crypto.price.substring(0, 11)}</p>
+              <p className="changes">{crypto.change.substring(0, 12)}</p>
+              <Graph uuid={crypto.uuid} />
+
+              {/* <div>
+                {crypto.sparkline.map((spark, s) => {
+                  return <div key={s}>{spark}</div>;
+                })}
+              </div> */}
+            </div>
+          );
+        })}
+      </ul>
+    </>
+  );
 };
 
 export default Chart;
