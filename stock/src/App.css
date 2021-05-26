@@ -27,6 +27,8 @@ margin-right: 4vw;
   -ms-animation: fadeIn linear 5s;
 }
 
+
+
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
@@ -117,6 +119,14 @@ margin-right: 4vw;
 	height: max-content;
 	padding: 5px;
 }
+
+.changesTwo{
+	background-color:green;
+	width:max-content;
+	height: max-content;
+	padding: 5px;
+}
+
 
 .singleCrypto img{
 width: 35px;

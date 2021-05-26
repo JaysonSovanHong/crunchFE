@@ -1,6 +1,5 @@
-import axios from "axios";
 import { useContext } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { UserContext } from "./Context/UserContext";
 import "./App.css";
 
@@ -15,6 +14,7 @@ import Signup from "./pages/Signup";
 
 function App() {
   const { userState } = useContext(UserContext);
+  const [user, setUser] = userState;
 
   // useEffect(function () {
   //   axios.get(`${process.env.REACT_APP_BACKEND_URL}`).then(console.log);
@@ -24,8 +24,6 @@ function App() {
     <div className="App">
       <Headers />
 
-      <Profile />
-
       <Switch>
         <Route
           exact
@@ -34,32 +32,57 @@ function App() {
             return <Home />;
           }}
         />
+
+        <Route
+          exact
+          path="/user/profile"
+          render={() => {
+            if (user.id) {
+              return <Profile />;
+            } else {
+              return <Redirect to="/" />;
+            }
+          }}
+        />
+
         <Route
           exact
           path="/stocks"
           render={() => {
-            return <Chart />;
+            if (user.id) {
+              return <Chart />;
+            } else {
+              return <Redirect to="/" />;
+            }
           }}
         />
         <Route
           exact
           path="/stock"
           render={() => {
-            return <SearchCrypto />;
+            if (user.id) {
+              return <SearchCrypto />;
+            } else {
+              return <Redirect to="/" />;
+            }
           }}
         />
         <Route
           exact
           path="/user/login"
           render={() => {
-            return <Login />;
+            if (user.id) {
+              return <Login />;
+            }
           }}
         />
         <Route
           exact
           path="/user/signup"
           render={() => {
-            return <Signup />;
+            if (user.id) {
+              return <Signup />;
+            }
           }}
         />
       </Switch>

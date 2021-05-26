@@ -8,7 +8,7 @@ const Chart = () => {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/stocks`
     );
-    console.log(response);
+    // console.log(response);
     setGetStocks(response.data.message.data.coins);
   };
   useEffect(getAllStock, []);
@@ -21,7 +21,13 @@ const Chart = () => {
             <div key={crypto.uuid}>
               <p>{crypto.name}</p>
               <p>${crypto.price.substring(0, 11)}</p>
-              <p className="changes">{crypto.change.substring(0, 12)}</p>
+              <p
+                className={
+                  parseFloat(crypto.change) > 0 ? "changesTwo" : "changes"
+                }
+              >
+                {parseFloat(crypto.change)}
+              </p>
               <Graph uuid={crypto.uuid} />
 
               {/* <div>

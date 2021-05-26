@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import "../../node_modules/react-vis/dist/style.css";
 import {
@@ -14,29 +14,34 @@ import {
 const Graph = (props) => {
   const [displayGraph, setDisplayGraph] = useState(false);
   const [graphData, setGraphData] = useState([]);
-  const handleClick = async () => {
-    if (displayGraph === false) {
-      let response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/stock/history?time=7d&query=${props.uuid}`
-      );
-      setDisplayGraph(true);
-      const mappedData = response.data.result.data.history.map((data) => {
-        const date = moment.unix(data.timestamp).format("MM/DD");
-        console.log(date);
-        return {
-          y: data.price,
-          x: data.timestamp,
-        };
-      });
+  const [timeMode, setTimeMode] = useState("7d");
 
-      setGraphData(mappedData);
-    }
+  const handleClick = async () => {
+    let response = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/stock/history?time=${timeMode}&query=${props.uuid}`
+    );
+    console.log(response);
+    setDisplayGraph(true);
+    const mappedData = response.data.result.data.history.map((data) => {
+      // const date = moment.unix(data.timestamp).format("MM/DD");
+      return {
+        y: data.price,
+        x: data.timestamp,
+      };
+    });
+
+    setGraphData(mappedData);
   };
+  useEffect(() => {
+    if (displayGraph) {
+      handleClick();
+    }
+  }, [timeMode]);
 
   return (
-    <div>
+    <div className="graphDisplay">
       {displayGraph && (
-        <XYPlot xType="time" width={500} height={300}>
+        <XYPlot xType="time" width={600} height={300}>
           <HorizontalGridLines />
           <VerticalGridLines />
           <XAxis
@@ -49,6 +54,21 @@ const Graph = (props) => {
         </XYPlot>
       )}
       {!displayGraph && <button onClick={handleClick}>Show Graph</button>}
+      <button
+        onClick={() => {
+          setTimeMode("24h");
+        }}
+      >
+        24Hour
+      </button>
+
+      <button
+        onClick={() => {
+          setTimeMode("7d");
+        }}
+      >
+        7d
+      </button>
     </div>
   );
 };

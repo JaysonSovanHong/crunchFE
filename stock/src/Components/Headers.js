@@ -8,7 +8,6 @@ const Headers = () => {
       </div>
 
       <div>
-        {" "}
         <Nav />
       </div>
     </div>

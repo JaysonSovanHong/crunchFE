@@ -1,11 +1,13 @@
 import Chart from "../Components/Chart";
-import Sidebar from "../Components/Sidebar";
+import { UserContext } from "../Context/UserContext";
+import { useContext } from "react";
 import SearchCrypto from "./SearchCrypto";
 
 const Profile = () => {
+  const user = useContext(UserContext);
+
   return (
     <div>
-      Profile
       <SearchCrypto />
       <Chart />
     </div>
