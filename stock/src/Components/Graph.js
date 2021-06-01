@@ -20,7 +20,6 @@ const Graph = (props) => {
     let response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/stock/history?time=${timeMode}&query=${props.uuid}`
     );
-    console.log(response);
     setDisplayGraph(true);
     const mappedData = response.data.result.data.history.map((data) => {
       // const date = moment.unix(data.timestamp).format("MM/DD");
@@ -41,20 +40,20 @@ const Graph = (props) => {
   return (
     <div className="graphDisplay">
       {displayGraph && (
-        <XYPlot xType="time" width={600} height={300}>
+        <XYPlot xType="time" width={400} height={200}>
           <HorizontalGridLines />
           <VerticalGridLines />
           <XAxis
-            tickTotal={6}
+            tickTotal={8}
             tickFormat={(v) => moment.unix(v).format("MM/DD")}
             title="X Axis"
           />
-          <YAxis title="Y Axis" />
+          <YAxis tickPadding={4} title="Y Axis" />
           <LineSeries data={graphData} />
         </XYPlot>
       )}
       {!displayGraph && <button onClick={handleClick}>Show Graph</button>}
-      <button
+      {/* <button
         onClick={() => {
           setTimeMode("24h");
         }}
@@ -68,7 +67,7 @@ const Graph = (props) => {
         }}
       >
         7d
-      </button>
+      </button> */}
     </div>
   );
 };

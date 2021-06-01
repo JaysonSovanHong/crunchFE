@@ -8,17 +8,17 @@ const Chart = () => {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/stocks`
     );
-    // console.log(response);
+    console.log(response);
     setGetStocks(response.data.message.data.coins);
   };
   useEffect(getAllStock, []);
 
   return (
     <>
-      <ul>
+      <ul className="stockInfo">
         {getStocks.map((crypto, c) => {
           return (
-            <div key={crypto.uuid}>
+            <div className="cryptoGraph" key={crypto.uuid}>
               <p>{crypto.name}</p>
               <p>${crypto.price.substring(0, 11)}</p>
               <p

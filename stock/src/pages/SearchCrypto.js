@@ -1,15 +1,35 @@
-import { useState } from "react";
 import axios from "axios";
+import { useState, useContext } from "react";
+import { UserContext } from "../Context/UserContext";
 
-const SearchCrypto = () => {
+const SearchCrypto = (props) => {
   const [searchField, setSearchField] = useState("");
   const [searchCryptos, setSearchCryptos] = useState([]);
+  const [cryptoInfo, setCryptoInfo] = useState([]);
+  const { userState } = useContext(UserContext);
+  const [user, setUser] = userState;
+
   const getSearchCRYPTO = async (e) => {
     e.preventDefault();
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/stock?query=${searchField}`
     );
+
     setSearchCryptos(response.data.result);
+  };
+
+  const handleClick = async (e, uuid, name) => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/stock/save`,
+      {
+        uuid,
+        name,
+        email: user.email,
+      }
+    );
+    props.setReload(true);
+    // console.log(response.data.result.data.coin);
+    // setCryptoInfo(response.data.result.data.coin);
   };
 
   return (
@@ -30,6 +50,14 @@ const SearchCrypto = () => {
             </p>
             <p>{crypto.symbol}</p>
             <p> {crypto.name}</p>
+            <p></p>
+            <button
+              onClick={(e) => {
+                handleClick(e, crypto.uuid, crypto.name);
+              }}
+            >
+              add
+            </button>
           </div>
         ))}
       </div>

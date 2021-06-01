@@ -16,10 +16,6 @@ function App() {
   const { userState } = useContext(UserContext);
   const [user, setUser] = userState;
 
-  // useEffect(function () {
-  //   axios.get(`${process.env.REACT_APP_BACKEND_URL}`).then(console.log);
-  // });
-
   return (
     <div className="App">
       <Headers />
@@ -28,6 +24,13 @@ function App() {
         <Route
           exact
           path="/"
+          render={() => {
+            return <Home />;
+          }}
+        />
+        <Route
+          exact
+          path="/user/logout"
           render={() => {
             return <Home />;
           }}
@@ -49,40 +52,28 @@ function App() {
           exact
           path="/stocks"
           render={() => {
-            if (user.id) {
-              return <Chart />;
-            } else {
-              return <Redirect to="/" />;
-            }
+            return <Chart />;
           }}
         />
         <Route
           exact
           path="/stock"
           render={() => {
-            if (user.id) {
-              return <SearchCrypto />;
-            } else {
-              return <Redirect to="/" />;
-            }
+            return <SearchCrypto />;
           }}
         />
         <Route
           exact
           path="/user/login"
           render={() => {
-            if (user.id) {
-              return <Login />;
-            }
+            return <Login />;
           }}
         />
         <Route
           exact
           path="/user/signup"
           render={() => {
-            if (user.id) {
-              return <Signup />;
-            }
+            return <Signup />;
           }}
         />
       </Switch>

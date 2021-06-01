@@ -1,5 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import Book1 from "../images/book1.png";
+import Book2 from "../images/book2.png";
+import Book3 from "../images/book3.png";
+import Book4 from "../images/book4.png";
+import Book5 from "../images/book5.png";
+import Book6 from "../images/book6.png";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -22,7 +28,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className="login">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name"></label>
@@ -48,7 +54,7 @@ const Signup = () => {
           <label htmlFor="password"></label>
           <input
             id="password"
-            placeholder="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -59,6 +65,14 @@ const Signup = () => {
           </button>
         </div>
       </form>
+      <div className="backgroundBookShelf">
+        <img className="left" src={Book1}></img>
+        <img className="right" src={Book2}></img>
+        <img className="left" src={Book3}></img>
+        <img className="right" src={Book4}></img>
+        <img className="left" src={Book5}></img>
+        <img className="right" src={Book6}></img>
+      </div>
     </div>
   );
 };

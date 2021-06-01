@@ -1,6 +1,13 @@
 import axios from "axios";
 import { useState, useContext } from "react";
 import { UserContext } from "../Context/UserContext";
+import { Redirect, Route } from "react-router-dom";
+import Book1 from "../images/book1.png";
+import Book2 from "../images/book2.png";
+import Book3 from "../images/book3.png";
+import Book4 from "../images/book4.png";
+import Book5 from "../images/book5.png";
+import Book6 from "../images/book6.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,11 +30,12 @@ const Login = () => {
     }
   };
   return (
-    <div>
+    <div className="login">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="loginEmail">Email:</label>
+          <label htmlFor="loginEmail"></label>
           <input
+            placeholder="EMAIL"
             id="loginEmail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -35,16 +43,25 @@ const Login = () => {
         </div>
 
         <div>
-          <label htmlFor="loginPassword">Password:</label>
+          <label htmlFor="loginPassword"></label>
           <input
+            placeholder="PASSWORD"
             id="loginPassword"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Submit</button>
         </div>
+        <button type="submit">Submit</button>
       </form>
+      <div className="backgroundBookShelf">
+        <img className="left" src={Book1}></img>
+        <img className="right" src={Book2}></img>
+        <img className="left" src={Book3}></img>
+        <img className="right" src={Book4}></img>
+        <img className="left" src={Book5}></img>
+        <img className="right" src={Book6}></img>
+      </div>
     </div>
   );
 };
