@@ -50,18 +50,39 @@ function App() {
 
         <Route
           exact
+          path="/user/login"
+          render={() => {
+            if (!user.id) {
+              return <Login />;
+            } else {
+              return <Redirect to="/user/profile" />;
+            }
+          }}
+        />
+
+        <Route
+          exact
           path="/stocks"
           render={() => {
-            return <Chart />;
+            if (user.id) {
+              return <Chart />;
+            } else {
+              return <Redirect to="/" />;
+            }
           }}
         />
         <Route
           exact
           path="/stock"
           render={() => {
-            return <SearchCrypto />;
+            if (user.id) {
+              return <SearchCrypto />;
+            } else {
+              return <Redirect to="/" />;
+            }
           }}
         />
+
         <Route
           exact
           path="/user/login"
@@ -69,11 +90,27 @@ function App() {
             return <Login />;
           }}
         />
+
+        <Route
+          exact
+          path="/user/profile"
+          render={() => {
+            if (user.id) {
+              return <Profile />;
+            } else {
+              return <Redirect to="/" />;
+            }
+          }}
+        />
         <Route
           exact
           path="/user/signup"
           render={() => {
-            return <Signup />;
+            if (!user.id) {
+              return <Signup />;
+            } else {
+              return <Redirect to="/user/profile" />;
+            }
           }}
         />
       </Switch>

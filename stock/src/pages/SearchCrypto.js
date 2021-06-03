@@ -14,7 +14,6 @@ const SearchCrypto = (props) => {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/stock?query=${searchField}`
     );
-
     setSearchCryptos(response.data.result);
   };
 
@@ -28,8 +27,6 @@ const SearchCrypto = (props) => {
       }
     );
     props.setReload(true);
-    // console.log(response.data.result.data.coin);
-    // setCryptoInfo(response.data.result.data.coin);
   };
 
   return (
@@ -37,10 +34,11 @@ const SearchCrypto = (props) => {
       <form onSubmit={getSearchCRYPTO}>
         <input
           type="search"
+          placeholder="Enter Crypto Name"
           onChange={(e) => setSearchField(e.target.value)}
           value={searchField}
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Search</button>
       </form>
       <div className="searchContainer">
         {searchCryptos.map((crypto) => (
@@ -49,7 +47,7 @@ const SearchCrypto = (props) => {
               <img src={crypto.iconUrl} alt={crypto.name} />
             </p>
             <p>{crypto.symbol}</p>
-            <p> {crypto.name}</p>
+            <p>{crypto.name}</p>
             <p></p>
             <button
               onClick={(e) => {

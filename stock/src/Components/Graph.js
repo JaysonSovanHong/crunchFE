@@ -40,7 +40,7 @@ const Graph = (props) => {
   return (
     <div className="graphDisplay">
       {displayGraph && (
-        <XYPlot xType="time" width={400} height={200}>
+        <XYPlot xType="time" margin={{ left: 60 }} width={400} height={200}>
           <HorizontalGridLines />
           <VerticalGridLines />
           <XAxis
@@ -53,21 +53,6 @@ const Graph = (props) => {
         </XYPlot>
       )}
       {!displayGraph && <button onClick={handleClick}>Show Graph</button>}
-      {/* <button
-        onClick={() => {
-          setTimeMode("24h");
-        }}
-      >
-        24Hour
-      </button>
-
-      <button
-        onClick={() => {
-          setTimeMode("7d");
-        }}
-      >
-        7d
-      </button> */}
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { UserContext } from "../Context/UserContext";
+import { useContext } from "react";
 import Book1 from "../images/book1.png";
 import Book2 from "../images/book2.png";
 import Book3 from "../images/book3.png";
@@ -11,7 +13,8 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
+  const { userState } = useContext(UserContext);
+  const [user, setUser] = userState;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ const Signup = () => {
         `${process.env.REACT_APP_BACKEND_URL}/user/signup`,
         { name, email, password }
       );
-      localStorage.setItem("userId", newUser.data.user.id);
+      localStorage.setItem("userId", newUser.data.user_id);
       setUser(newUser.data.user);
     } catch (error) {
       console.log(error);

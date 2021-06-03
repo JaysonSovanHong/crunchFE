@@ -16,7 +16,6 @@ const Sidebar = (props) => {
         headers: { Authorization: user.id },
       }
     );
-    // console.log(response.data.watchlist);
     setData(response.data.watchlist);
     props.setReload(false);
   };
@@ -31,6 +30,7 @@ const Sidebar = (props) => {
       const coin = info.data.result.data.coin;
       result.push(coin);
     }
+    console.log(result);
     setFavCrypto(result);
   };
   useEffect(fetchInfo, [data]);
@@ -50,8 +50,16 @@ const Sidebar = (props) => {
             <div className="sidebarInner" key={c}>
               <p>{crypto.name}</p>
               <img src={crypto.iconUrl} width="50px"></img>
-              <p>{crypto.price}</p>
-              <p>{crypto.change}</p>
+              <p>${parseFloat(crypto.price).toFixed(2)}</p>
+              <p
+                className={
+                  parseFloat(crypto.change).toFixed(3) > 0
+                    ? "changesTwo"
+                    : "changes"
+                }
+              >
+                {parseFloat(crypto.change).toFixed(5)}
+              </p>
               {/* <p>{crypto.description}</p> */}
               <p>
                 <a href={crypto.websiteUrl}>Learn More</a>

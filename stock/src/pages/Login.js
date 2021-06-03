@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import { UserContext } from "../Context/UserContext";
 import { Redirect, Route } from "react-router-dom";
+
 import Book1 from "../images/book1.png";
 import Book2 from "../images/book2.png";
 import Book3 from "../images/book3.png";
@@ -23,7 +24,7 @@ const Login = () => {
         { email, password }
       );
       console.log(newUser);
-      localStorage.setItem("userId", newUser.data.user.id);
+      localStorage.setItem("userId", newUser.data.user_id);
       setUser(newUser.data.user);
     } catch (error) {
       console.log(error);
